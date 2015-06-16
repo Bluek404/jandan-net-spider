@@ -60,10 +60,22 @@ module Spider
     end
   end
 end
-
-if ARGV.size != 2
-  puts "需要指定起始页"
+begin
+  if ARGV.size != 2
+    puts "需要指定起始页"
+  end
+  b = ARGV[0].to_i
+  if b%50 != 0
+    puts "起始页必须为50的倍数"
+    exit
+  end
+  e = ARGV[1].to_i
+  if (e+1)%50 != 0
+    puts "终止页+1必须为50的倍数"
+    exit
+  end
+rescue
+  puts "参数必须为数字"
+  exit
 end
-b = ARGV[0].to_i
-e = ARGV[1].to_i
 Spider.run(b, e)
