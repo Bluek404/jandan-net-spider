@@ -51,15 +51,20 @@ module Spider
       sleep 1
       next unless comment
       puts "get page #{ i } done"
-      comments.concat comment
       if i != b && i%50 === 0
-        file = File.new "./pages/#{ i-50 }-#{ i }.json", "w"
+        file = File.new "./pages/#{ i-50 }-#{ i-1 }.json", "w"
         comments.to_json file
         comments = Array(Comment).new
         sleep 50 # 休息，防止被封IP
       end
+      comments.concat comment
     end
   end
 end
 
-Spider.run(4000, 5000)
+if ARGV.size != 2
+  puts "需要指定起始页"
+end
+b = ARGV[0].to_i
+e = ARGV[1].to_i
+Spider.run(b, e)
