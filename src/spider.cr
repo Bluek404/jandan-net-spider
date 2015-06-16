@@ -48,16 +48,15 @@ module Spider
     comments = Array(Comment).new
     (b..e).each do |i|
       comment = get_comments(i)
-      sleep 1
       next unless comment
       puts "get page #{ i } done"
-      if i != b && i%50 === 0
-        file = File.new "./pages/#{ i-50 }-#{ i-1 }.json", "w"
+      comments.concat comment
+      if i != b && (i+1)%50 === 0
+        file = File.new "./pages/#{ i-50 }-#{ i }.json", "w"
         comments.to_json file
         comments = Array(Comment).new
         sleep 50 # 休息，防止被封IP
       end
-      comments.concat comment
     end
   end
 end
