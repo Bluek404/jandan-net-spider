@@ -52,7 +52,7 @@ module Spider
       puts "get page #{ i } done"
       comments.concat comment
       if i != b && (i+1)%50 === 0
-        file = File.new "./pages/#{ i-50 }-#{ i }.json", "w"
+        file = File.new "./pages/#{ i+1-50 }-#{ i }.json", "w"
         comments.to_json file
         comments = Array(Comment).new
         sleep 50 # 休息，防止被封IP
