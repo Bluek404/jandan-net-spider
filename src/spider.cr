@@ -18,7 +18,7 @@ module Spider
     end
 
     def to_json(io)
-      c = @content.clone.gsub("\"", "\\\"").gsub("\n", "")
+      c = @content.to_json
       io << %({"content":"#{ c }","oo":#{ oo },"xx":#{ xx }})
     end
   end
@@ -51,7 +51,7 @@ module Spider
       next unless comment
       puts "get page #{ i } done"
       comments.concat comment
-      if i != b && (i+1)%50 === 0
+      if i != b && (i+1)%50 == 0
         file = File.new "./pages/#{ i+1-50 }-#{ i }.json", "w"
         comments.to_json file
         comments = Array(Comment).new
@@ -60,6 +60,7 @@ module Spider
     end
   end
 end
+
 begin
   if ARGV.size != 2
     puts "需要指定起始页"
@@ -78,4 +79,4 @@ rescue
   puts "参数必须为数字"
   exit
 end
-Spider.run(b, e)
+Spider.run b, e
