@@ -9,20 +9,6 @@ module Spider
   @@headers["accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
   @@headers["User-Agent"] = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.125 Safari/537.36"
 
-  struct Comment
-    property content
-    property oo
-    property xx
-
-    def initialize(@content, @oo, @xx)
-    end
-
-    def to_json(io)
-      c = @content.to_json
-      io << %({"content":"#{ c }","oo":#{ oo },"xx":#{ xx }})
-    end
-  end
-
   private def self.get_comments(page)
     body = HTTP::Client.get("http://jandan.net/pic/page-" + page.to_s, @@headers).body
 
