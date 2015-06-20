@@ -22,6 +22,6 @@ struct Spider::Comment
 
   def to_json(io)
     c = @content.to_json
-    io << %({"content":"#{ c }","oo":#{ oo },"xx":#{ xx }})
+    io << %({"content":#{ c },"oo":#{ oo },"xx":#{ xx }})
   end
 end
