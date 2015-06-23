@@ -3,7 +3,7 @@ require "json"
 require "./spider/*"
 
 module Spider
-  @@find_comment = %r(<li id="comment-[0-9]*">[\w\W]{0,}?((?:<p[^>]*>(?:[\w\W]{0,}?)</p>)+)[\w\W]{0,}?\[<span id="cos_support-[0-9]*">([0-9]*)</span>\][\w\W]{0,}?\[<span id="cos_unsupport-[0-9]*">([0-9]*)</span>\][\w\W]{0,}?</li>)
+  @@find_comment = %r(<li id="comment-[0-9]*">[\w\W]{0,}?((?:<p[^>]*>[\w\W]{0,}?<\/p>)+)[\w\W]{0,}?\[<span id="cos_support-[0-9]*">([0-9]*)<\/span>\][\w\W]{0,}?\[<span id="cos_unsupport-[0-9]*">([0-9]*)<\/span>\][\w\W]{0,}?<\/li>)
   @@headers = HTTP::Headers.new
   @@headers["accept-language"] = "zh-cn,zh;q=0.8"
   @@headers["accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
